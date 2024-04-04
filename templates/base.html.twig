@@ -16,6 +16,10 @@
     
     {% block stylesheets %}
     {% endblock %}
+
+
+    {% block javascripts %}
+    {% endblock %}
   </head>
   <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
@@ -189,8 +193,5 @@
     <script src="{{ asset('admin/vendors/@coreui/chartjs/js/coreui-chartjs.js') }}"></script>
     <script src="{{ asset('admin/vendors/@coreui/utils/js/coreui-utils.js') }}"></script>
     <script src="{{ asset('admin/js/main.js') }}"></script>
-
-    {% block javascripts %}
-    {% endblock %}
   </body>
 </html>
