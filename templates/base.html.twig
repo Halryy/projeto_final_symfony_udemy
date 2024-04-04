@@ -6,17 +6,15 @@
     <meta name="description" content="Área Administrativa">
     <title>{% block title %}Bem-vindo{% endblock %}</title>
     <!-- Vendors styles-->
-    <link rel="stylesheet" href="vendors/simplebar/css/simplebar.css">
-    <link rel="stylesheet" href="css/vendors/simplebar.css">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/simplebar/css/simplebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/css/vendors/simplebar.css') }}">
     <!-- Main styles for this application-->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
     <!-- We use those styles to show code examples, you should remove them in your application.-->
-    <link href="css/examples.css" rel="stylesheet">
-    <link href="vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+    <link href="{{ asset('admin/css/examples.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/vendors/@coreui/chartjs/css/coreui-chartjs.css') }}" rel="stylesheet">
+    
     {% block stylesheets %}
-    {% endblock %}
-
-    {% block javascripts %}
     {% endblock %}
   </head>
   <body>
@@ -34,11 +32,11 @@
             <svg class="nav-icon">
               <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
             </svg> Dashboard</a></li>
-        <li class="nav-title">Theme</li>
-        <li class="nav-item"><a class="nav-link" href="colors.html">
+        <li class="nav-title">Produtos</li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('app_admin_product_property_index') }}">
             <svg class="nav-icon">
               <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-            </svg> Colors</a></li>
+            </svg> Propriedades</a></li>
         <li class="nav-item"><a class="nav-link" href="typography.html">
             <svg class="nav-icon">
               <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
@@ -184,15 +182,15 @@
       </footer>
     </div>
     <!-- CoreUI and necessary plugins-->
-    <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
-    <script src="vendors/simplebar/js/simplebar.min.js"></script>
+    <script src="{{ asset('admin/vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/simplebar/js/simplebar.min.js') }}"></script>
     <!-- Plugins and scripts required by this view-->
-    <script src="vendors/chart.js/js/chart.min.js"></script>
-    <script src="vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
-    <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-    </script>
+    <script src="{{ asset('admin/vendors/chart.js/js/chart.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/@coreui/chartjs/js/coreui-chartjs.js') }}"></script>
+    <script src="{{ asset('admin/vendors/@coreui/utils/js/coreui-utils.js') }}"></script>
+    <script src="{{ asset('admin/js/main.js') }}"></script>
 
+    {% block javascripts %}
+    {% endblock %}
   </body>
 </html>

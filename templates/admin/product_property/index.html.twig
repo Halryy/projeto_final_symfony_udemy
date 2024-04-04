@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductProperty index
+{% endblock %}
+
+{% block body %}
+	<div>
+		<div class="row text-end">
+			<div class="col">
+                <a class="btn btn-success text-white mb-3" href="{{ path('app_admin_product_property_new') }}">Novo</a>
+            </div>
+		</div>
+		<div class="card mb-5">
+			<div class="card-header">Propriedade dos produtos</div>
+			<div class="card-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Título</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for product_property in product_properties %}
+							<tr>
+								<td>{{ product_property.title }}</td>
+								<td>
+									<a class="btn btn-primary float-end" href="{{ path('app_admin_product_property_edit', {'id': product_property.id}) }}">editar</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="3">Sem registros</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}
