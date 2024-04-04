@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New NewsCategory{% endblock %}
+
+{% block body %}
+    <h1>Criar categoria de notícia</h1>
+
+    {{ include('admin/news_category/_form.html.twig') }}
+
+    <a class="btn" href="{{ path('app_admin_news_category_index') }}">Voltar</a>
+{% endblock %}

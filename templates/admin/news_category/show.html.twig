@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NewsCategory{% endblock %}
+
+{% block body %}
+    <h1>NewsCategory</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ news_category.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ news_category.title }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_news_category_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_news_category_edit', {'id': news_category.id}) }}">edit</a>
+
+    {{ include('admin/news_category/_delete_form.html.twig') }}
+{% endblock %}
