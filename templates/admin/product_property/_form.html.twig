@@ -5,5 +5,11 @@
         <div class="form-text">Informe o título da propriedade</div>
     </div>
 
+    <div class="mb-3">
+        <label for="{{ form.language.vars.id }}" class="form-label">Idioma</label>
+        {{ form_widget(form.language, {'attr':{'class':'form-control'}}) }}
+        <div class="form-text">Informe o idioma dessa categoria</div>
+    </div>
+
     <button class="btn btn-info float-start text-white">Salvar</button>
 {{ form_end(form) }}

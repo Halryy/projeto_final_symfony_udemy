@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Lista de propriedade de produtos
-{% endblock %}
-
+{% set languagesEnum = enum('App\\Entity\\Enum\\LanguageEnum') %}
+{% block title %}Lista de propriedade de produtos{% endblock %}
 {% block javascripts %}
 
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -49,6 +47,7 @@
 					<thead>
 						<tr>
 							<th>Título</th>
+							<th>Idioma</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -56,6 +55,8 @@
 						{% for product_property in product_properties %}
 							<tr>
 								<td>{{ product_property.title }}</td>
+								<td>{{ languagesEnum.getFlag(product_property.language)|raw }}
+								</td>
 								<td>
 									<a class="btn btn-primary float-end" href="{{ path('app_admin_product_property_edit', {'id': product_property.id}) }}">editar</a>
 								</td>
