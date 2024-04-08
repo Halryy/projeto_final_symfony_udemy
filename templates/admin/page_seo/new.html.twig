@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PageSeo{% endblock %}
+
+{% block body %}
+    <h1>Create new PageSeo</h1>
+
+    {{ include('admin/page_seo/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_page_seo_index') }}">back to list</a>
+{% endblock %}

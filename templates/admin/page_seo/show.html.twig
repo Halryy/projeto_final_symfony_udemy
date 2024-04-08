@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PageSeo{% endblock %}
+
+{% block body %}
+    <h1>PageSeo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ page_seo.id }}</td>
+            </tr>
+            <tr>
+                <th>HomePageTitle</th>
+                <td>{{ page_seo.homePageTitle }}</td>
+            </tr>
+            <tr>
+                <th>HomePageDescription</th>
+                <td>{{ page_seo.homePageDescription }}</td>
+            </tr>
+            <tr>
+                <th>AboutUsPageTitle</th>
+                <td>{{ page_seo.aboutUsPageTitle }}</td>
+            </tr>
+            <tr>
+                <th>AboutUsPageDescription</th>
+                <td>{{ page_seo.aboutUsPageDescription }}</td>
+            </tr>
+            <tr>
+                <th>ProductListingPageTitle</th>
+                <td>{{ page_seo.productListingPageTitle }}</td>
+            </tr>
+            <tr>
+                <th>ProductListingPageDescription</th>
+                <td>{{ page_seo.productListingPageDescription }}</td>
+            </tr>
+            <tr>
+                <th>NewsListingPageTitle</th>
+                <td>{{ page_seo.newsListingPageTitle }}</td>
+            </tr>
+            <tr>
+                <th>NewsListingPageDescription</th>
+                <td>{{ page_seo.newsListingPageDescription }}</td>
+            </tr>
+            <tr>
+                <th>ServiceListingPageTitle</th>
+                <td>{{ page_seo.serviceListingPageTitle }}</td>
+            </tr>
+            <tr>
+                <th>ServiceListingPageDescription</th>
+                <td>{{ page_seo.serviceListingPageDescription }}</td>
+            </tr>
+            <tr>
+                <th>FinancingListPageTitle</th>
+                <td>{{ page_seo.financingListPageTitle }}</td>
+            </tr>
+            <tr>
+                <th>FinancingListPageDescription</th>
+                <td>{{ page_seo.financingListPageDescription }}</td>
+            </tr>
+            <tr>
+                <th>VideoListingPageTitle</th>
+                <td>{{ page_seo.videoListingPageTitle }}</td>
+            </tr>
+            <tr>
+                <th>VideoListingPageDescription</th>
+                <td>{{ page_seo.videoListingPageDescription }}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{ page_seo.language }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_page_seo_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_page_seo_edit', {'id': page_seo.id}) }}">edit</a>
+
+    {{ include('admin/page_seo/_delete_form.html.twig') }}
+{% endblock %}

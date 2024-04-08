@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PageSeo{% endblock %}
+
+{% block body %}
+    <h1>Edit PageSeo</h1>
+
+    {{ include('admin/page_seo/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_page_seo_index') }}">back to list</a>
+
+    {{ include('admin/page_seo/_delete_form.html.twig') }}
+{% endblock %}

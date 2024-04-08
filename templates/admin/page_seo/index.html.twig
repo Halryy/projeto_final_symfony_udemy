@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PageSeo index{% endblock %}
+
+{% block body %}
+    <h1>PageSeo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>HomePageTitle</th>
+                <th>HomePageDescription</th>
+                <th>AboutUsPageTitle</th>
+                <th>AboutUsPageDescription</th>
+                <th>ProductListingPageTitle</th>
+                <th>ProductListingPageDescription</th>
+                <th>NewsListingPageTitle</th>
+                <th>NewsListingPageDescription</th>
+                <th>ServiceListingPageTitle</th>
+                <th>ServiceListingPageDescription</th>
+                <th>FinancingListPageTitle</th>
+                <th>FinancingListPageDescription</th>
+                <th>VideoListingPageTitle</th>
+                <th>VideoListingPageDescription</th>
+                <th>Language</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for page_seo in page_seos %}
+            <tr>
+                <td>{{ page_seo.id }}</td>
+                <td>{{ page_seo.homePageTitle }}</td>
+                <td>{{ page_seo.homePageDescription }}</td>
+                <td>{{ page_seo.aboutUsPageTitle }}</td>
+                <td>{{ page_seo.aboutUsPageDescription }}</td>
+                <td>{{ page_seo.productListingPageTitle }}</td>
+                <td>{{ page_seo.productListingPageDescription }}</td>
+                <td>{{ page_seo.newsListingPageTitle }}</td>
+                <td>{{ page_seo.newsListingPageDescription }}</td>
+                <td>{{ page_seo.serviceListingPageTitle }}</td>
+                <td>{{ page_seo.serviceListingPageDescription }}</td>
+                <td>{{ page_seo.financingListPageTitle }}</td>
+                <td>{{ page_seo.financingListPageDescription }}</td>
+                <td>{{ page_seo.videoListingPageTitle }}</td>
+                <td>{{ page_seo.videoListingPageDescription }}</td>
+                <td>{{ page_seo.language }}</td>
+                <td>
+                    <a href="{{ path('app_admin_page_seo_show', {'id': page_seo.id}) }}">show</a>
+                    <a href="{{ path('app_admin_page_seo_edit', {'id': page_seo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_page_seo_new') }}">Create new</a>
+{% endblock %}
