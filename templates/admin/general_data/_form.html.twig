@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+    <div class="mb-3">
+        <label for="{{ form.phone.vars.id }}" class="form-label">Telefone</label>
+        {{ form_widget(form.phone, {'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.email.vars.id }}" class="form-label">E-mail</label>
+        {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.address.vars.id }}" class="form-label">Endereço</label>
+        {{ form_widget(form.address, {'attr':{'class':'form-control'}}) }}
+    </div>
+
+    <button class="btn btn-info float-start text-white">Salvar</button>
+{{ form_end(form) }}
