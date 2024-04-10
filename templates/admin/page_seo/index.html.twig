@@ -1,63 +1,71 @@
 {% extends 'base.html.twig' %}
+{% set languagesEnum = enum('App\\Entity\\Enum\\LanguageEnum') %}
+{% block title %}Lista das edições de SEO páginas{% endblock %}
+{% block javascripts %}
 
-{% block title %}PageSeo index{% endblock %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(() => {
+        $('#tabela').DataTable({
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
+            "language": {
+                "lengthMenu": "Mostrando _MENU_ registros por página",
+                "zeroRecords": "Nada encontrado",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                "search": " Pesquisar",
+
+                "paginate": {
+                    "first": "Primeira",
+                    "last": "Última",
+                    "next": "Próxima",
+                    "previous": "Anterior"
+                },
+            }
+        });
+    } );
+</script>
+
+{% endblock %}
 
 {% block body %}
-    <h1>PageSeo index</h1>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css"/>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>HomePageTitle</th>
-                <th>HomePageDescription</th>
-                <th>AboutUsPageTitle</th>
-                <th>AboutUsPageDescription</th>
-                <th>ProductListingPageTitle</th>
-                <th>ProductListingPageDescription</th>
-                <th>NewsListingPageTitle</th>
-                <th>NewsListingPageDescription</th>
-                <th>ServiceListingPageTitle</th>
-                <th>ServiceListingPageDescription</th>
-                <th>FinancingListPageTitle</th>
-                <th>FinancingListPageDescription</th>
-                <th>VideoListingPageTitle</th>
-                <th>VideoListingPageDescription</th>
-                <th>Language</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for page_seo in page_seos %}
-            <tr>
-                <td>{{ page_seo.id }}</td>
-                <td>{{ page_seo.homePageTitle }}</td>
-                <td>{{ page_seo.homePageDescription }}</td>
-                <td>{{ page_seo.aboutUsPageTitle }}</td>
-                <td>{{ page_seo.aboutUsPageDescription }}</td>
-                <td>{{ page_seo.productListingPageTitle }}</td>
-                <td>{{ page_seo.productListingPageDescription }}</td>
-                <td>{{ page_seo.newsListingPageTitle }}</td>
-                <td>{{ page_seo.newsListingPageDescription }}</td>
-                <td>{{ page_seo.serviceListingPageTitle }}</td>
-                <td>{{ page_seo.serviceListingPageDescription }}</td>
-                <td>{{ page_seo.financingListPageTitle }}</td>
-                <td>{{ page_seo.financingListPageDescription }}</td>
-                <td>{{ page_seo.videoListingPageTitle }}</td>
-                <td>{{ page_seo.videoListingPageDescription }}</td>
-                <td>{{ page_seo.language }}</td>
-                <td>
-                    <a href="{{ path('app_admin_page_seo_show', {'id': page_seo.id}) }}">show</a>
-                    <a href="{{ path('app_admin_page_seo_edit', {'id': page_seo.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="17">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_admin_page_seo_new') }}">Create new</a>
+    <div>
+        <div class="row text-end">
+            <div class="col">
+                <a class="btn btn-success text-white mb-3" href="{{ path('app_admin_product_property_new') }}">Novo</a>
+            </div>
+        </div>
+        <div class="card mb-5">
+            <div class="card-header">Lista das edições de SEO páginas</div>
+            <div class="card-body">
+                <table id="tabela" class="table">
+                    <thead>
+                    <tr>
+                        <th>Idioma</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for page_seo in page_seos %}
+                        <tr>
+                            <td>{{ languagesEnum.getFlag(page_seo.language)|raw }}</td>
+                            <td>
+                                <a class="btn btn-primary float-end" href="{{ path('app_admin_page_seo_edit', {'id': page_seo.id}) }}">Editar</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="17">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

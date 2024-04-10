@@ -13,6 +13,7 @@
         "doctrine/orm": "^3.1",
         "symfony/asset": "6.4.*",
         "symfony/console": "6.4.*",
+        "symfony/debug": "^4.4",
         "symfony/dotenv": "6.4.*",
         "symfony/flex": "^2",
         "symfony/form": "6.4.*",
@@ -22,7 +23,9 @@
         "symfony/security-csrf": "6.4.*",
         "symfony/twig-bundle": "6.4.*",
         "symfony/validator": "6.4.*",
-        "symfony/yaml": "6.4.*"
+        "symfony/yaml": "6.4.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "symfony/debug-bundle": "6.4.*",
