@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar URL de post do form de contato{% endblock %}
+
+{% block body %}
+    <h1>Editar URL de post do form de contato</h1>
+
+    {{ include('admin/contact_form_url_post/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}
