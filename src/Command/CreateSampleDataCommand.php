@@ -4,8 +4,10 @@ namespace App\Command;
 
 use App\Entity\Enum\LanguageEnum;
 use App\Entity\GeneralData;
+use App\Entity\GlobalTags;
 use App\Entity\PageSeo;
 use App\Repository\GeneralDataRepository;
+use App\Repository\GlobalTagsRepository;
 use App\Repository\PageSeoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -25,6 +27,7 @@ class CreateSampleDataCommand extends Command
     public function __construct(
         private GeneralDataRepository $generalDataRepository,
         private PageSeoRepository $pageSeoRepository,
+        private GlobalTagsRepository $globalTagsRepository,
         private EntityManagerInterface $entityManager
     )
     {
@@ -73,6 +76,21 @@ class CreateSampleDataCommand extends Command
             }
         }
 
+        $globalTags = $this->globalTagsRepository->findAll();
+        if ($globalTags)
+        {
+            $io->writeln('Tags globais <comment>já existem</comment>');
+        } else {
+            $io->writeln('Tags globais <info>criadas</info>');
+            $globalTags = new GlobalTags();
+            $globalTags->setGa4('GA4');
+            $globalTags->setPixelMetaAds('Meta pixel ads');
+            $globalTags->setTagsGoogleAds('Google ads');
+
+            $this->entityManager->persist($globalTags);
+            $this->entityManager->flush();
+        }
+
         $generalData = $this->generalDataRepository->find(1);
         if ($generalData)
         {
@@ -87,7 +105,6 @@ class CreateSampleDataCommand extends Command
             $this->entityManager->persist($generalData);
             $this->entityManager->flush();
         }
-
         $io->success('Dados injetados com sucesso.');
 
         return Command::SUCCESS;

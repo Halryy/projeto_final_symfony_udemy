@@ -1,0 +1,39 @@
+{{ form_start(form) }}
+    <div class="mb-3">
+        <label for="{{ form.Ga4.vars.id }}" class="form-label">GA4</label>
+        {{ form_widget(form.Ga4, {
+                'attr': {
+                    'class':'form-control',
+                    'rows':'10',
+                    'style':'font-family: monospace'
+                }
+            })
+        }}
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ form.tagsGoogleAds.vars.id }}" class="form-label">Tags Google Ads</label>
+        {{ form_widget(form.tagsGoogleAds, {
+                'attr': {
+                    'class':'form-control',
+                    'rows':'10',
+                    'style':'font-family: monospace'
+                }
+            })
+        }}
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ form.pixelMetaAds.vars.id }}" class="form-label">Pixel Meta Ads</label>
+        {{ form_widget(form.pixelMetaAds, {
+                'attr': {
+                    'class':'form-control',
+                    'rows':'10',
+                    'style':'font-family: monospace'
+                }
+            })
+        }}
+    </div>
+
+    <button class="btn btn-info float-start text-white mt-4 mb-3">Salvar</button>
+{{ form_end(form) }}
