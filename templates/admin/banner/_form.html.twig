@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+    <div class="mb-3">
+        <label for="{{ form.title.vars.id }}" class="form-label">Titulo</label>
+        {{ form_widget(form.title, {'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.subtitle.vars.id }}" class="form-label">Legenda</label>
+        {{ form_widget(form.subtitle, {'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.active.vars.id }}" class="form-label">Ativo</label>
+        {{ form_widget(form.active, {'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.position.vars.id }}" class="form-label">Posição</label>
+        {{ form_widget(form.position, {'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.url.vars.id }}" class="form-label">URL</label>
+        {{ form_widget(form.url, {'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.language.vars.id }}" class="form-label">Idioma</label>
+        {{ form_widget(form.language, {'attr':{'class':'form-control'}}) }}
+        <div class="form-text">Informe o idioma desse banner</div>
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.imageFile.vars.id }}" class="form-label">Imagem</label>
+        {{ form_widget(form.imageFile) }}
+        {% if banner.imageFile is not empty %}
+            <img class="mt-3" src="{{ vich_uploader_asset(banner, 'imageFile') }}" width="150">
+        {% endif %}
+    </div>
+    <button class="btn btn-info float-start text-white">Salvar</button>
+{{ form_end(form) }}

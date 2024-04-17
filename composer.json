@@ -25,7 +25,8 @@
         "symfony/validator": "6.4.*",
         "symfony/yaml": "6.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "vich/uploader-bundle": "^2.3"
     },
     "require-dev": {
         "symfony/debug-bundle": "6.4.*",
