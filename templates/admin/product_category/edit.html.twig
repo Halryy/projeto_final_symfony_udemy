@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ProductCategory{% endblock %}
+
+{% block body %}
+    <h1>Edit ProductCategory</h1>
+
+    {{ include('admin/product_category/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {{ include('admin/product_category/_delete_form.html.twig') }}
+
+    <a class="btn ms-3" href="{{ path('app_admin_product_category_index') }}">Voltar</a>
+{% endblock %}

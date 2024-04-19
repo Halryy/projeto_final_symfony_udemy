@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% set languagesEnum = enum('App\\Entity\\Enum\\LanguageEnum') %}
+{% block title %}Lista de categorias de produtos{% endblock %}
+{% block javascripts %}
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(() => {
+            $('#tabela').DataTable({
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
+                "language": {
+                    "lengthMenu": "Mostrando _MENU_ registros por página",
+                    "zeroRecords": "Nada encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum registro disponível",
+                    "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                    "search": " Pesquisar",
+
+                    "paginate": {
+                        "first": "Primeira",
+                        "last": "Última",
+                        "next": "Próxima",
+                        "previous": "Anterior"
+                    },
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
+{% block body %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css"/>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+
+    <div>
+        <div class="row text-end">
+            <div class="col">
+                <a class="btn btn-success text-white mb-3" href="{{ path('app_admin_product_category_new') }}">Nova</a>
+            </div>
+        </div>
+        <div class="card mb-5">
+            <div class="card-header">Lista de categorias de produtos</div>
+            <div class="card-body">
+                <table class="table" id="tabela">
+                    <thead>
+                    <tr>
+                        <th class="text-start">Título</th>
+                        <th class="text-start">Imagem</th>
+                        <th class="text-start">Idioma</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product_category in product_categories %}
+                        <tr>
+                            <td class="text-start">{{ product_category.title }}</td>
+                            <td class="text-start">
+                                {% if product_category.ImageFile is not empty %}
+                                    <img src="{{ vich_uploader_asset(product_category, 'imageFile') }}" width="75">
+                                {% endif %}
+                            </td>
+                            <td>{{ languagesEnum.getFlag(product_category.language)|raw }}
+                            </td>
+                            <td>
+                                <a class="btn btn-primary float-end"
+                                   href="{{ path('app_admin_product_category_edit', {'id': product_category.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>Sem registros</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
