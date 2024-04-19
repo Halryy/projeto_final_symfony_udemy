@@ -129,7 +129,7 @@ class Banner
     {
         $this->imageFile = $imageFile;
         if (null !== $imageFile) {
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->imgUpdatedAt = new \DateTimeImmutable();
         }
     }
 

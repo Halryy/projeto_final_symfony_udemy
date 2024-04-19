@@ -7,10 +7,12 @@ use App\Entity\Enum\LanguageEnum;
 use App\Entity\GeneralData;
 use App\Entity\GlobalTags;
 use App\Entity\PageSeo;
+use App\Entity\WhoWeArePage;
 use App\Repository\ContactFormUrlPostRepository;
 use App\Repository\GeneralDataRepository;
 use App\Repository\GlobalTagsRepository;
 use App\Repository\PageSeoRepository;
+use App\Repository\WhoWeArePageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -31,6 +33,7 @@ class CreateSampleDataCommand extends Command
         private PageSeoRepository $pageSeoRepository,
         private GlobalTagsRepository $globalTagsRepository,
         private ContactFormUrlPostRepository $contactFormUrlPostRepository,
+        private WhoWeArePageRepository $whoWeArePageRepository,
         private EntityManagerInterface $entityManager
     )
     {
@@ -75,6 +78,25 @@ class CreateSampleDataCommand extends Command
                 $pageSeo->setLanguage($option);
 
                 $this->entityManager->persist($pageSeo);
+                $this->entityManager->flush();
+            }
+        }
+
+        foreach (LanguageEnum::getOptions() as $index => $option)
+        {
+            $whoWeArePage = $this->whoWeArePageRepository->findOneBy(['language' => $option]);
+            if ($whoWeArePage)
+            {
+                $io->writeln('Quem somos em '.$index.' <comment>já existe</comment>');
+            } else {
+                $io->writeln('Quem somos em '.$index.' <info>criado</info>');
+                $whoWeArePage = new WhoWeArePage();
+                $whoWeArePage->setPresentationPart1('part1');
+                $whoWeArePage->setPresentationPart2('part2');
+                $whoWeArePage->setPresentationPart3('part3');
+                $whoWeArePage->setLanguage($option);
+
+                $this->entityManager->persist($whoWeArePage);
                 $this->entityManager->flush();
             }
         }

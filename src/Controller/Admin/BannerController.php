@@ -47,6 +47,7 @@ class BannerController extends AbstractController
     {
         $form = $this->createForm(BannerType::class, $banner);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 

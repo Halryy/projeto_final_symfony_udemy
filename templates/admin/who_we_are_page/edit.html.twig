@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Quem Somos{% endblock %}
+
+{% block body %}
+    <h1>Editar Quem Somos</h1>
+
+    {{ include('admin/who_we_are_page/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a class="btn ms-3" href="{{ path('app_admin_who_we_are_page_index') }}">Voltar</a>
+{% endblock %}
