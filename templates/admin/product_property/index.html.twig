@@ -55,15 +55,16 @@
 						{% for product_property in product_properties %}
 							<tr>
 								<td>{{ product_property.title }}</td>
-								<td>{{ languagesEnum.getFlag(product_property.language)|raw }}
-								</td>
+								<td>{{ languagesEnum.getFlag(product_property.language)|raw }}</td>
 								<td>
 									<a class="btn btn-primary float-end" href="{{ path('app_admin_product_property_edit', {'id': product_property.id}) }}">editar</a>
 								</td>
 							</tr>
 						{% else %}
 							<tr>
-								<td colspan="3">Sem registros</td>
+								<td>Sem registros</td>
+								<td></td>
+								<td></td>
 							</tr>
 						{% endfor %}
 					</tbody>

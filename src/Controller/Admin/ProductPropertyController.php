@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller\Admin;
 
 use App\Entity\ProductProperty;
@@ -39,14 +38,6 @@ class ProductPropertyController extends AbstractController
         return $this->render('admin/product_property/new.html.twig', [
             'product_property' => $productProperty,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_admin_product_property_show', methods: ['GET'])]
-    public function show(ProductProperty $productProperty): Response
-    {
-        return $this->render('admin/product_property/show.html.twig', [
-            'product_property' => $productProperty,
         ]);
     }
 

@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_admin_timeline_delete', {'id': timeline.id}) }}" onsubmit="return confirm('Tem certeza que quer deletar este item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ timeline.id) }}">
-    <button class="btn btn-danger float-start ms-3 text-white">Delete</button>
+    <button class="btn btn-danger float-start ms-3 text-white">Deletar</button>
 </form>

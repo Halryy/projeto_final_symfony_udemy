@@ -27,3 +27,9 @@ vich_uploader:
             upload_destination: '%kernel.project_dir%/public/images/productCategoryImage'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             inject_on_load: true
+
+        productImage:
+            uri_prefix: /images/productImage
+            upload_destination: '%kernel.project_dir%/public/images/productImage'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            inject_on_load: true
