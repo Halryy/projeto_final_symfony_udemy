@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Criar novo valor de propriedade de produto{% endblock %}
+
+{% block body %}
+    <h1>Criar novo valor de propriedade de produto</h1>
+
+    {{ include('admin/product_property_value/_form.html.twig') }}
+
+    <a class="btn ms-3" href="{{ path('app_admin_product_property_value_index') }}">Voltar</a>
+{% endblock %}
