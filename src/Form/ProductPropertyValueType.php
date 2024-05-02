@@ -18,15 +18,6 @@ class ProductPropertyValueType extends AbstractType
     {
         $builder
             ->add('value')
-            ->add('language', ChoiceType::class, [
-                'choices' => LanguageEnum::getOptions()
-            ])
-            ->add('product', EntityType::class, [
-                'class' => Product::class,
-                'choice_label' => function (Product $product) {
-                    return $product->getTitle().' - '.LanguageEnum::getDescription($product->getLanguage());
-                },
-            ])
             ->add('productProperty', EntityType::class, [
                 'class' => ProductProperty::class,
                 'choice_label' => function (ProductProperty $productProperty) {

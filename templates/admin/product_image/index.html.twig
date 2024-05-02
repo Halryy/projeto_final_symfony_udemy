@@ -49,17 +49,15 @@
                 <table class="table" id="tabela">
                     <thead>
                     <tr>
-                        <th class="text-start">Produto</th>
-                        <th class="text-start">Propriedade</th>
-                        <th class="text-start">Valor</th>
-                        <th class="text-start">Idioma</th>
+                        <th class="text-start">Imagem</th>
+                        <th class="text-start">Título</th>
+                        <th class="text-start">Alt</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for product_image in product_images %}
                         <tr>
-                            <td class="text-start">{{ product_image.product.title }}</td>
                             <td class="text-start">
                                 {% if product_image.ImageFile is not empty %}
                                     <img src="{{ vich_uploader_asset(product_image, 'imageFile') }}" width="75">
@@ -75,7 +73,6 @@
                     {% else %}
                         <tr>
                             <td>Sem registros</td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

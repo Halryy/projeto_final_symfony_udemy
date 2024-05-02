@@ -16,12 +16,6 @@ class ProductImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('product', EntityType::class, [
-                'class' => Product::class,
-                'choice_label' => function (Product $product) {
-                    return $product->getTitle().' - '.LanguageEnum::getDescription($product->getLanguage());
-                },
-            ])
             ->add('imageFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => false,

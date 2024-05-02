@@ -49,20 +49,16 @@
                 <table class="table" id="tabela">
                     <thead>
                     <tr>
-                        <th class="text-start">Produto</th>
                         <th class="text-start">Propriedade</th>
                         <th class="text-start">Valor</th>
-                        <th class="text-start">Idioma</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for product_property_value in product_property_values %}
                         <tr>
-                            <td class="text-start">{{ product_property_value.product.title }}</td>
                             <td class="text-start">{{ product_property_value.productProperty.title }}</td>
                             <td class="text-start">{{ product_property_value.value }}</td>
-                            <td>{{ languagesEnum.getFlag(product_property_value.language)|raw }}
                             <td>
                                 <a class="btn btn-primary float-end"
                                    href="{{ path('app_admin_product_property_value_edit', {'id': product_property_value.id, 'productId':product.id}) }}">Editar</a>
@@ -71,8 +67,6 @@
                     {% else %}
                         <tr>
                             <td>Sem registros</td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>

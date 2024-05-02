@@ -49,7 +49,6 @@
                 <table class="table" id="tabela">
                     <thead>
                     <tr>
-                        <th class="text-start">Produto</th>
                         <th class="text-start">Título</th>
                         <th class="text-start"></th>
                     </tr>
@@ -57,7 +56,6 @@
                     <tbody>
                     {% for product_manual in product_manuals %}
                         <tr>
-                            <td class="text-start">{{ product_manual.product.title }}</td>
                             <td class="text-start">{{ product_manual.title }}</td>
                             <td>
                                 {% if product_manual.manualFile is not empty %}
@@ -71,7 +69,6 @@
                     {% else %}
                         <tr>
                             <td>Sem registros</td>
-                            <td></td>
                             <td></td>
                         </tr>
                     {% endfor %}
