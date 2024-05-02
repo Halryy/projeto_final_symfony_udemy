@@ -1,11 +1,11 @@
 {{ form_start(form) }}
     <div class="row">
-        <div class="mb-3 col col-12">
+        <div class="mb-3 col col-6">
             <label for="{{ form.status.vars.id }}" class="form-label">Mostrar no site</label>
             {{ form_widget(form.status, {'attr':{'class':'form-control'}}) }}
         </div>
 
-        <div class="mb-3 col col-12">
+        <div class="mb-3 col col-6">
             <label for="{{ form.highlighted.vars.id }}" class="form-label">Em destaque</label>
             {{ form_widget(form.highlighted, {'attr':{'class':'form-control'}}) }}
         </div>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="mb-3 col col-6">
+        <div class="mb-3 col col-12">
             <label for="{{ form.category.vars.id }}" class="form-label">Categorias</label>
             {{ form_widget(form.category, {'attr':{'class':'form-control'}}) }}
         </div>
@@ -46,15 +46,49 @@
             {% endif %}
         </div>
 
-        <div class="mb-3 col col-6">
-            <label for="{{ form.fullDescription.vars.id }}" class="form-label">Descrição Completa</label>
-            {{ form_widget(form.fullDescription, {'attr':{'class':'form-control'}}) }}
-        </div>
-
-        <div class="mb-3 col col-6">
+        <div class="mb-3 col col-12">
             <label for="{{ form.language.vars.id }}" class="form-label">Idioma</label>
             {{ form_widget(form.language, {'attr':{'class':'form-control'}}) }}
         </div>
+
+        <div class="mb-3 col col-12">
+            <label for="{{ form.fullDescription.vars.id }}" class="form-label">Descrição Completa</label>
+            {{ form_widget(form.fullDescription, {'attr':{'class':'form-control editor'}}) }}
+        </div>
     </div>
-    <button class="btn btn-info float-start text-white mt-3">Salvar</button>
+    <button class="btn btn-info float-start text-white">Salvar</button>
+
+    <style>
+        #news_category input[type="checkbox"] {
+            display: inline-block;
+            margin-right: 20px;
+            width: 3%;
+        }
+
+        #news_category label {
+            display: inline-block;
+            margin-right: 20px;
+            width: 90%;
+        }
+    </style>
+
+    <!-- Place the first <script> tag in your HTML's <head> -->
+    <script src="https://cdn.tiny.cloud/1/ldf4k16no1yhf84a91tb8viwnhurfap5h474z0letln2ddxh/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+    <script>
+        tinymce.init({
+            menubar: false,
+            selector: 'textarea.editor',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+            toolbar: 'undo redo | fontsize | bold italic underline strikethrough | checklist numlist bullist | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
 {{ form_end(form) }}
