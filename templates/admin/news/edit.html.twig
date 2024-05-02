@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar notícia{% endblock %}
+
+{% block body %}
+    <h1>Editar notícia</h1>
+
+    {{ include('admin/news/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {{ include('admin/news/_delete_form.html.twig') }}
+
+    <a class="btn ms-3" href="{{ path('app_admin_news_index') }}">Voltar</a>
+{% endblock %}

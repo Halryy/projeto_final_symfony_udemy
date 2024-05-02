@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Criar nova notícia{% endblock %}
+
+{% block body %}
+    <h1>Criar nova notícia</h1>
+
+    {{ include('admin/news/_form.html.twig') }}
+
+    <a class="btn" href="{{ path('app_admin_news_index') }}">Voltar</a>
+{% endblock %}
