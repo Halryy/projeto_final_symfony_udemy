@@ -71,8 +71,10 @@
                             <td class="text-start">{{ product.title }}</td>
                             <td>{{ languagesEnum.getFlag(product.language)|raw }}</td>
                             <td>
-                                <a class="btn btn-primary float-end"
-                                   href="{{ path('app_admin_product_edit', {'id': product.id}) }}">Editar</a>
+                                <a class="btn btn-success float-end ms-2 text-white" href="{{ path('app_admin_product_manual_index', {'productId': product.id}) }}">Manuais</a>
+                                <a class="btn btn-success float-end ms-2 text-white" href="{{ path('app_admin_product_image_index', {'productId': product.id}) }}">Imagens</a>
+                                <a class="btn btn-success float-end ms-2 text-white" href="{{ path('app_admin_product_property_value_index', {'productId': product.id}) }}">Propriedades</a>
+                                <a class="btn btn-primary float-end" href="{{ path('app_admin_product_edit', {'id': product.id}) }}">Editar</a>
                             </td>
                         </tr>
                     {% else %}

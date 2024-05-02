@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% set languagesEnum = enum('App\\Entity\\Enum\\LanguageEnum') %}
-{% block title %}Lista de valores das propriedades dos produtos{% endblock %}
+{% block title %}Lista das imagens do produto{% endblock %}
 {% block javascripts %}
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -35,16 +35,16 @@
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 
     <h1>{{ product.title }}</h1>
-    <h4>Propriedades do produto </h4>
+    <h4>Imagens do produto</h4>
 
     <div>
         <div class="row text-end">
             <div class="col">
-                <a class="btn btn-success text-white mb-3" href="{{ path('app_admin_product_property_value_new',  {'productId': product.id}) }}">Novo</a>
+                <a class="btn btn-success text-white mb-3" href="{{ path('app_admin_product_image_new',  {'productId': product.id}) }}">Novo</a>
             </div>
         </div>
         <div class="card mb-5">
-            <div class="card-header">Valor da propriedade do produto</div>
+            <div class="card-header">Imagens do produto</div>
             <div class="card-body">
                 <table class="table" id="tabela">
                     <thead>
@@ -57,15 +57,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for product_property_value in product_property_values %}
+                    {% for product_image in product_images %}
                         <tr>
-                            <td class="text-start">{{ product_property_value.product.title }}</td>
-                            <td class="text-start">{{ product_property_value.productProperty.title }}</td>
-                            <td class="text-start">{{ product_property_value.value }}</td>
-                            <td>{{ languagesEnum.getFlag(product_property_value.language)|raw }}
+                            <td class="text-start">{{ product_image.product.title }}</td>
+                            <td class="text-start">
+                                {% if product_image.ImageFile is not empty %}
+                                    <img src="{{ vich_uploader_asset(product_image, 'imageFile') }}" width="75">
+                                {% endif %}
+                            </td>
+                            <td class="text-start">{{ product_image.imageTitle }}</td>
+                            <td class="text-start">{{ product_image.imageAlt }}</td>
                             <td>
                                 <a class="btn btn-primary float-end"
-                                   href="{{ path('app_admin_product_property_value_edit', {'id': product_property_value.id, 'productId':product.id}) }}">Editar</a>
+                                   href="{{ path('app_admin_product_image_edit', {'id': product_image.id, 'productId':product.id}) }}">Editar</a>
                             </td>
                         </tr>
                     {% else %}

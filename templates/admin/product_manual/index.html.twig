@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% set languagesEnum = enum('App\\Entity\\Enum\\LanguageEnum') %}
-{% block title %}Lista de valores das propriedades dos produtos{% endblock %}
+{% block title %}Lista dos manuais do produto{% endblock %}
 {% block javascripts %}
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -35,44 +35,42 @@
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 
     <h1>{{ product.title }}</h1>
-    <h4>Propriedades do produto </h4>
+    <h4>Manuais do produto</h4>
 
     <div>
         <div class="row text-end">
             <div class="col">
-                <a class="btn btn-success text-white mb-3" href="{{ path('app_admin_product_property_value_new',  {'productId': product.id}) }}">Novo</a>
+                <a class="btn btn-success text-white mb-3" href="{{ path('app_admin_product_manual_new',  {'productId': product.id}) }}">Novo</a>
             </div>
         </div>
         <div class="card mb-5">
-            <div class="card-header">Valor da propriedade do produto</div>
+            <div class="card-header">Manuais</div>
             <div class="card-body">
                 <table class="table" id="tabela">
                     <thead>
                     <tr>
                         <th class="text-start">Produto</th>
-                        <th class="text-start">Propriedade</th>
-                        <th class="text-start">Valor</th>
-                        <th class="text-start">Idioma</th>
-                        <th></th>
+                        <th class="text-start">Título</th>
+                        <th class="text-start"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for product_property_value in product_property_values %}
+                    {% for product_manual in product_manuals %}
                         <tr>
-                            <td class="text-start">{{ product_property_value.product.title }}</td>
-                            <td class="text-start">{{ product_property_value.productProperty.title }}</td>
-                            <td class="text-start">{{ product_property_value.value }}</td>
-                            <td>{{ languagesEnum.getFlag(product_property_value.language)|raw }}
+                            <td class="text-start">{{ product_manual.product.title }}</td>
+                            <td class="text-start">{{ product_manual.title }}</td>
                             <td>
+                                {% if product_manual.manualFile is not empty %}
+                                    <a class="btn btn-secondary float-end ms-2" href="{{ vich_uploader_asset(product_manual, 'manualFile') }}" target="_blank">Ver PDF</a>
+                                {% endif %}
+
                                 <a class="btn btn-primary float-end"
-                                   href="{{ path('app_admin_product_property_value_edit', {'id': product_property_value.id, 'productId':product.id}) }}">Editar</a>
+                                   href="{{ path('app_admin_product_manual_edit', {'id': product_manual.id, 'productId':product.id}) }}">Editar</a>
                             </td>
                         </tr>
                     {% else %}
                         <tr>
                             <td>Sem registros</td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>

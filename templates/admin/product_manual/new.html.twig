@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Criar novo manual do produto{% endblock %}
+
+{% block body %}
+    <h1>{{ product.title }}</h1>
+    <h4>Criar novo manual do produto</h4>
+
+    {{ include('admin/product_manual/_form.html.twig') }}
+
+    <a class="btn ms-3" href="{{ path('app_admin_product_manual_index', {'productId': product.id}) }}">Voltar</a>
+{% endblock %}
