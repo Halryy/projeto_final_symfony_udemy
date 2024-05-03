@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NewsImage index{% endblock %}
+
+{% block body %}
+    <h1>NewsImage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Alt</th>
+                <th>Image</th>
+                <th>ImgUpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for news_image in news_images %}
+            <tr>
+                <td>{{ news_image.id }}</td>
+                <td>{{ news_image.title }}</td>
+                <td>{{ news_image.alt }}</td>
+                <td>{{ news_image.image }}</td>
+                <td>{{ news_image.imgUpdatedAt ? news_image.imgUpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_news_image_show', {'id': news_image.id}) }}">show</a>
+                    <a href="{{ path('app_admin_news_image_edit', {'id': news_image.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_news_image_new') }}">Create new</a>
+{% endblock %}
