@@ -81,6 +81,7 @@
                             <td class="text-start">{{ newsItem.date|date('d/m/Y') }}</td>
                             <td>{{ languagesEnum.getFlag(newsItem.language)|raw }}</td>
                             <td>
+                                <a class="btn btn-success float-end text-white ms-2" href="{{ path('app_admin_news_image_index', {'newsId': newsItem.id}) }}">Imagens</a>
                                 <a class="btn btn-primary float-end" href="{{ path('app_admin_news_edit', {'id': newsItem.id}) }}">Editar</a>
                             </td>
                         </tr>

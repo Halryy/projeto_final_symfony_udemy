@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class NewsImageType extends AbstractType
 {
@@ -16,13 +17,11 @@ class NewsImageType extends AbstractType
         $builder
             ->add('title')
             ->add('alt')
-            ->add('image')
-            ->add('imgUpdatedAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('news', EntityType::class, [
-                'class' => News::class,
-                'choice_label' => 'id',
+            ->add('imageFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'asset_helper' => false,
+                'download_uri' => false
             ])
         ;
     }

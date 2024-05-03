@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit NewsImage{% endblock %}
+{% block title %}Editar imagem da notícia{% endblock %}
 
 {% block body %}
-    <h1>Edit NewsImage</h1>
+    <h1>{{ news.title }}</h1>
+    <h1>Editar imagem da notícia</h1>
 
     {{ include('admin/news_image/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_admin_news_image_index') }}">back to list</a>
-
     {{ include('admin/news_image/_delete_form.html.twig') }}
+
+    <a class="btn ms-3" href="{{ path('app_admin_news_image_index', {'id': news_image.id, 'newsId': news.id}) }}">Voltar</a>
 {% endblock %}

@@ -28,7 +28,7 @@ class NewsImage
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[Vich\UploadableField(mapping: 'bannerImage', fileNameProperty: 'image')]
+    #[Vich\UploadableField(mapping: 'newsImage', fileNameProperty: 'image')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
