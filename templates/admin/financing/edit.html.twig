@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar financiamento{% endblock %}
+
+{% block body %}
+    <h1>Editar financiamento</h1>
+
+    {{ include('admin/financing/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {{ include('admin/financing/_delete_form.html.twig') }}
+
+    <a class="btn ms-3" href="{{ path('app_admin_financing_index') }}">Voltar</a>
+{% endblock %}
