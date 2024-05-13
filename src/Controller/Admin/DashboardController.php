@@ -17,7 +17,7 @@ class DashboardController extends AbstractController
         BannerRepository $bannerRepository,
         NewsRepository $newsRepository,
         ProductRepository $productRepository,
-        TestimonyRepository $testimonyRepository
+        TestimonyRepository $testimonyRepository,
     ): Response
     {
         $totalBanners = sizeof($bannerRepository->findAll());

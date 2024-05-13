@@ -175,28 +175,13 @@
                     <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
                 </svg>
             </button>
-            <a class="header-brand d-md-none" href="#">
-                <svg width="118" height="46" alt="CoreUI Logo">
-                    <use xlink:href="assets/brand/coreui.svg#full"></use>
-                </svg>
-            </a>
-            Dashboard
+            <a class="btn btn-danger text-white" href="{{ path('app_logout') }}">Logout</a>
         </div>
     </header>
     <div class="body flex-grow-1 px-3">
         <div class="container-lg"> {% block body %}{% endblock %}
         </div>
     </div>
-    <footer class="footer">
-        <div>
-            <a href="https://coreui.io">CoreUI
-            </a>
-            <a href="https://coreui.io">Bootstrap Admin Template</a>
-            © 2023 creativeLabs.
-        </div>
-        <div class="ms-auto">Powered by&nbsp;<a href="https://coreui.io/docs/">CoreUI UI Components</a>
-        </div>
-    </footer>
 </div>
 <!-- CoreUI and necessary plugins-->
 <script src="{{ asset('admin/vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>

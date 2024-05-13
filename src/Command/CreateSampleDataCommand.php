@@ -7,11 +7,13 @@ use App\Entity\Enum\LanguageEnum;
 use App\Entity\GeneralData;
 use App\Entity\GlobalTags;
 use App\Entity\PageSeo;
+use App\Entity\User;
 use App\Entity\WhoWeArePage;
 use App\Repository\ContactFormUrlPostRepository;
 use App\Repository\GeneralDataRepository;
 use App\Repository\GlobalTagsRepository;
 use App\Repository\PageSeoRepository;
+use App\Repository\UserRepository;
 use App\Repository\WhoWeArePageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -21,6 +23,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand(
     name: 'app:create-sample-data',
@@ -34,6 +37,8 @@ class CreateSampleDataCommand extends Command
         private GlobalTagsRepository $globalTagsRepository,
         private ContactFormUrlPostRepository $contactFormUrlPostRepository,
         private WhoWeArePageRepository $whoWeArePageRepository,
+        private UserRepository $userRepository,
+        private UserPasswordHasherInterface $passwordHasher,
         private EntityManagerInterface $entityManager
     )
     {
@@ -141,6 +146,25 @@ class CreateSampleDataCommand extends Command
             $contactForm->setUrl('https://www.teste.com.br');
 
             $this->entityManager->persist($contactForm);
+            $this->entityManager->flush();
+        }
+
+        $admin = $this->userRepository->findAll();
+        if ($admin)
+        {
+            $io->writeln('Admin <comment>já existe</comment>');
+        } else {
+            $io->writeln('Admin <info>criado</info>');
+
+            $user = new User();
+            $plaintextPassword = "halry102030";
+
+            $hashedPassword = $this->passwordHasher->hashPassword($user, $plaintextPassword);
+            $user->setEmail('halryhenry2004@gmail.com');
+            $user->setPassword($hashedPassword);
+            $user->setRoles(["ROLE_ADMIN"]);
+
+            $this->entityManager->persist($user);
             $this->entityManager->flush();
         }
 
