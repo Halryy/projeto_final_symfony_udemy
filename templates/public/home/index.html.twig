@@ -3,18 +3,23 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% for banner in banners %}
+        <img src="{{ vich_uploader_asset(banner, 'imageFile') }}" width="75"><br>
+    {% endfor %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for productCategory in productCategories %}
+        {{ productCategory.title }}<br>
+    {% endfor %}
 
-    Home
-    <ul>
-        <li>Your controller at <code>/var/www/halry.com.br/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/var/www/halry.com.br/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    {% for news in allNews %}
+        {{ news.title }}<br>
+    {% endfor %}
+
+    {% for testimony in testimonies %}
+        {{ testimony.title }}<br>
+    {% endfor %}
+
+    {% for financing in financings %}
+        {{ financing.title }}<br>
+    {% endfor %}
 {% endblock %}

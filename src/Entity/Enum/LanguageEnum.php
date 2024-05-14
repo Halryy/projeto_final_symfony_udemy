@@ -29,6 +29,27 @@ enum LanguageEnum: int
         return $languages[$languageId];
     }
 
+    public static function getAbbreviations():array
+    {
+        return [
+            'pt' => self::PORTUGUESE->value,
+            'es' => self::SPANISH->value,
+            'en' => self::ENGLISH->value
+        ];
+    }
+
+    public static function getId($abbreviation):string
+    {
+        $languages = [
+            "pt" => self::PORTUGUESE->value,
+            "es" => self::SPANISH->value,
+            "en" => self::ENGLISH->value,
+            "" => ""
+        ];
+
+        return $languages[$abbreviation];
+    }
+
     public static function getFlag($languageId): string
     {
         // assets/images/flags/Flag_of_Brazil.svg

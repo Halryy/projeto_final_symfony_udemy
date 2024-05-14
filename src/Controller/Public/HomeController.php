@@ -2,21 +2,76 @@
 
 namespace App\Controller\Public;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Enum\LanguageEnum;
+use App\Repository\BannerRepository;
+use App\Repository\FinancingRepository;
+use App\Repository\NewsRepository;
+use App\Repository\ProductCategoryRepository;
+use App\Repository\TestimonyRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class HomeController extends AbstractController
+class HomeController extends BaseController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(
+        BannerRepository $bannerRepository,
+        ProductCategoryRepository $productCategoryRepository,
+        NewsRepository $newsRepository,
+        TestimonyRepository $testimonyRepository,
+        FinancingRepository $financingRepository,
+    ): Response
     {
+        $languageId = LanguageEnum::getId($this->session->get('language'));
+
+        $banners = $bannerRepository->findBy(
+            [
+                'language' => $languageId,
+                'active' => 1
+            ],
+            [
+                'position' => 'ASC'
+            ]
+        );
+
+        $productCategories = $productCategoryRepository->findBy([
+            'language' => $languageId,
+        ]);
+
+        $allNews = $newsRepository->findBy([
+           'language' => $languageId,
+            'status' => 1,
+            'highlighted' => 1
+        ], [
+            'date' => 'DESC'
+        ]);
+
+        $testimonies = $testimonyRepository->findBy([
+            'language' => $languageId,
+            'status' => 1,
+            'highlighted' => 1
+        ], [
+            'position' => 'ASC'
+        ]);
+
+        $financings = $financingRepository->findBy([
+            'language' => $languageId,
+            'status' => 1,
+            'highlighted' => 1
+        ], [
+            'position' => 'ASC'
+        ]);
+
         return $this->render('public/home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'banners' => $banners,
+            'productCategories' => $productCategories,
+            'allNews' => $allNews,
+            'testimonies' => $testimonies,
+            'financings' => $financings,
         ]);
     }
 
-    #[Route('/', name: 'app_who_we_are')]
+    #[Route('/quem-somos', name: 'app_who_we_are')]
     public function whoWeAre(): Response
     {
         return $this->render('public/who_we_are/who_we_are.html.twig', [
