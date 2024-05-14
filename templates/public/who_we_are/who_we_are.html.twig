@@ -3,18 +3,13 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
-
-    <div class="example-wrapper">
-        <h1>Hello {{ "Symfony is great"|trans }}! ✅</h1>
-
-        Quem somos
-        <ul>
-            <li>Your controller at <code>/var/www/halry.com.br/src/Controller/HomeController.php</code></li>
-            <li>Your template at <code>/var/www/halry.com.br/templates/home/index.html.twig</code></li>
-        </ul>
-    </div>
+    {{ pageSeo.aboutUsPageTitle }}<br>
+    {{ pageSeo.aboutUsPageDescription }}<br>
+    {{ generalData.address }}<br>
+    {{ generalData.email }}<br>
+    {{ generalData.phone }}<br>
+    {{ globalTags.pixelMetaAds }}<br>
+    {{ globalTags.tagsGoogleAds }}<br>
+    {{ globalTags.ga4 }}<br>
+    {{ urlToPostForm.url }}<br>
 {% endblock %}

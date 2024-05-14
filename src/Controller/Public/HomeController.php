@@ -7,6 +7,7 @@ use App\Repository\BannerRepository;
 use App\Repository\FinancingRepository;
 use App\Repository\NewsRepository;
 use App\Repository\ProductCategoryRepository;
+use App\Repository\ProductRepository;
 use App\Repository\TestimonyRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -22,11 +23,9 @@ class HomeController extends BaseController
         FinancingRepository $financingRepository,
     ): Response
     {
-        $languageId = LanguageEnum::getId($this->session->get('language'));
-
         $banners = $bannerRepository->findBy(
             [
-                'language' => $languageId,
+                'language' => $this->getLanguageId(),
                 'active' => 1
             ],
             [
@@ -35,11 +34,11 @@ class HomeController extends BaseController
         );
 
         $productCategories = $productCategoryRepository->findBy([
-            'language' => $languageId,
+            'language' => $this->getLanguageId(),
         ]);
 
         $allNews = $newsRepository->findBy([
-           'language' => $languageId,
+           'language' => $this->getLanguageId(),
             'status' => 1,
             'highlighted' => 1
         ], [
@@ -47,7 +46,7 @@ class HomeController extends BaseController
         ]);
 
         $testimonies = $testimonyRepository->findBy([
-            'language' => $languageId,
+            'language' => $this->getLanguageId(),
             'status' => 1,
             'highlighted' => 1
         ], [
@@ -55,7 +54,7 @@ class HomeController extends BaseController
         ]);
 
         $financings = $financingRepository->findBy([
-            'language' => $languageId,
+            'language' => $this->getLanguageId(),
             'status' => 1,
             'highlighted' => 1
         ], [
@@ -68,6 +67,10 @@ class HomeController extends BaseController
             'allNews' => $allNews,
             'testimonies' => $testimonies,
             'financings' => $financings,
+            'pageSeo' => $this->pageSeo,
+            'generalData' => $this->generalData,
+            'globalTags' => $this->globalTags,
+            'urlToPostForm' => $this->urlToPostForm
         ]);
     }
 
@@ -75,39 +78,72 @@ class HomeController extends BaseController
     public function whoWeAre(): Response
     {
         return $this->render('public/who_we_are/who_we_are.html.twig', [
-            'controller_name' => 'HomeController',
+            'pageSeo' => $this->pageSeo,
+            'generalData' => $this->generalData,
+            'globalTags' => $this->globalTags,
+            'urlToPostForm' => $this->urlToPostForm
         ]);
     }
 
     #[Route('/noticias', name: 'app_news')]
-    public function news(): Response
+    public function news(NewsRepository $newsRepository): Response
     {
+        $allNews = $newsRepository->findBy([
+            'language' => $this->getLanguageId(),
+            'status' => 1,
+            'highlighted' => 1
+        ], [
+            'date' => 'DESC'
+        ]);
+
         return $this->render('public/news/news.html.twig', [
-            'controller_name' => 'HomeController',
+            'pageSeo' => $this->pageSeo,
+            'generalData' => $this->generalData,
+            'globalTags' => $this->globalTags,
+            'urlToPostForm' => $this->urlToPostForm,
+            'allNews' => $allNews,
         ]);
     }
 
     #[Route('/noticia/{slug}', name: 'app_new_detail')]
-    public function new($slug): Response
+    public function new($slug, NewsRepository $newsRepository): Response
     {
+        $news = $newsRepository->findOneBy(['slug' => $slug]);
         return $this->render('public/news/news-detail.html.twig', [
-            'controller_name' => 'HomeController',
+            'pageSeo' => $this->pageSeo,
+            'generalData' => $this->generalData,
+            'globalTags' => $this->globalTags,
+            'urlToPostForm' => $this->urlToPostForm,
+            'news' => $news,
         ]);
     }
 
     #[Route('/produtos', name: 'app_products')]
-    public function products(): Response
+    public function products(ProductRepository $productRepository): Response
     {
+        $allProducts = $productRepository->findBy([
+            'status' => 1,
+            'language' => $this->getLanguageId(),
+        ]);
         return $this->render('public/product/products.html.twig', [
-            'controller_name' => 'HomeController',
+            'pageSeo' => $this->pageSeo,
+            'generalData' => $this->generalData,
+            'globalTags' => $this->globalTags,
+            'urlToPostForm' => $this->urlToPostForm,
+            'allProducts' => $allProducts,
         ]);
     }
 
     #[Route('/produto/{slug}', name: 'app_product_detail')]
-    public function product($slug): Response
+    public function product($slug, ProductRepository $productRepository): Response
     {
+        $product = $productRepository->findOneBy(['slug' => $slug]);
         return $this->render('public/product/product-detail.html.twig', [
-            'controller_name' => 'HomeController',
+            'pageSeo' => $this->pageSeo,
+            'generalData' => $this->generalData,
+            'globalTags' => $this->globalTags,
+            'urlToPostForm' => $this->urlToPostForm,
+            'product' => $product,
         ]);
     }
 
@@ -115,7 +151,10 @@ class HomeController extends BaseController
     public function financing(): Response
     {
         return $this->render('public/financing/financing.html.twig', [
-            'controller_name' => 'HomeController',
+            'pageSeo' => $this->pageSeo,
+            'generalData' => $this->generalData,
+            'globalTags' => $this->globalTags,
+            'urlToPostForm' => $this->urlToPostForm
         ]);
     }
 }
