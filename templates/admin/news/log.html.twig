@@ -46,52 +46,35 @@
                 <table class="table" id="tabela">
                     <thead>
                     <tr>
-                        <th class="text-start">Mostrar no site</th>
-                        <th class="text-start">Em destaque</th>
-                        <th class="text-start">Imagem</th>
-                        <th class="text-start">Título</th>
-                        <th class="text-start">Data</th>
-                        <th class="text-start">Idioma</th>
-                        <th></th>
+                        <th class="text-start">Data e hora</th>
+                        <th class="text-start">Logs</th>
+                        <th class="text-start">Usuário</th>
+                        <th class="text-start">Mudanças</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for newsItem in news %}
+                    {% for log in logs %}
                         <tr>
-                            <td class="text-start">
-                                {% if newsItem.status == 1 %}
-                                    <span class="badge badge-sm bg-success ms-auto">Ativo</span>
-                                {% else %}
-                                    <span class="badge badge-sm bg-danger ms-auto">Inativo</span>
-                                {% endif %}
-                            </td>
-                            <td class="text-start">
-                                {% if newsItem.highlighted == 1 %}
-                                    <span class="badge badge-sm bg-success ms-auto">Ativo</span>
-                                {% else %}
-                                    <span class="badge badge-sm bg-danger ms-auto">Inativo</span>
-                                {% endif %}
-                            </td>
-                            <td class="text-start">
-                                {% if newsItem.imageFile is not empty %}
-                                    <img src="{{ vich_uploader_asset(newsItem, 'imageFile') }}" width="75">
-                                {% endif %}
-                            </td>
-                            <td class="text-start">{{ newsItem.title }}</td>
-                            <td class="text-start">{{ newsItem.date|date('d/m/Y') }}</td>
-                            <td>{{ languagesEnum.getFlag(newsItem.language)|raw }}</td>
+                            <td>{{ log.dateTime|date('d/m/Y H:i:s') }}</td>
                             <td>
-                                <a class="btn btn-success float-end text-white ms-2" href="{{ path('app_admin_news_image_index', {'newsId': newsItem.id}) }}">Imagens</a>
-                                <a class="btn btn-warning float-end text-white ms-2" href="{{ path('app_admin_news_log', {'id': newsItem.id}) }}">Logs</a>
-                                <a class="btn btn-primary float-end" href="{{ path('app_admin_news_edit', {'id': newsItem.id}) }}">Editar</a>
+                                {% if log.action == 'insert' %}
+                                    <span class="badge bg-success">Inserção</span>
+                                {% endif %}
+
+                                {% if log.action == 'update' %}
+                                    <span class="badge bg-primary">Atualização</span>
+                                {% endif %}
+
+                                {% if log.action == 'delete' %}
+                                    <span class="badge bg-danger">Remoção</span>
+                                {% endif %}
                             </td>
+                            <td>{{ log.user.email }}</td>
+                            <td>{{ log.changedFields|json_encode()|raw }}</td>
                         </tr>
                     {% else %}
                         <tr>
                             <td>Sem registros</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
